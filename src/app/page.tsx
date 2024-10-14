@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/authOptions";
 import { redirect } from "next/navigation";
 import LogoutButton from "./components/LogoutButton";
 import { prisma } from "@/lib/prisma";

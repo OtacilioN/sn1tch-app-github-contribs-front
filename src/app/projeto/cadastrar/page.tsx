@@ -1,7 +1,7 @@
 // app/projeto/cadastrar/page.tsx
 import ProjectForm from "./ProjectForm";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/authOptions";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 

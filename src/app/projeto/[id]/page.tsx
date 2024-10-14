@@ -4,7 +4,7 @@ import { Card } from "flowbite-react";
 import GitTimeline from "./GitTimeline";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/authOptions";
 import { redirect } from "next/navigation";
 import LogoutButton from "@/app/components/LogoutButton";
 export const dynamic = "force-dynamic";

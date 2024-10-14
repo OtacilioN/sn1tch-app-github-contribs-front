@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LoginButton from "@/app/components/LoginButton";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/authOptions";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
