@@ -2,6 +2,7 @@
 
 import { Card } from "flowbite-react";
 import { useEffect, useState } from "react";
+import DognutContributions from "./DognutContributions";
 
 interface Author {
   email: string;
@@ -12,6 +13,7 @@ interface Author {
 interface SummaryItem {
   userEmail: string;
   userSummary: string;
+  contributionCounts: { type: string; count: number }[];
 }
 
 const StudentSummary = ({
@@ -70,13 +72,17 @@ const StudentSummary = ({
         });
     }
   }, [combinedTimeline, driveId]);
+
+  console.log(summary);
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-16">
       {authorsByContributions.map((author: any, index: number) => {
-        const userSummary =
-          summary?.find((item: any) => item.userEmail === author.email)
-            ?.userSummary ||
-          "Carregando informações da Inteligência Artificial...";
+        const userSummary = summary?.find(
+          (item: any) => item.userEmail === author.email
+        );
+        const userTextualSummary =
+          userSummary?.userSummary || "Processando com IA...";
+
         return (
           <Card key={index} className="max-w-sm">
             <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -90,7 +96,8 @@ const StudentSummary = ({
               Email: {author.email}
             </p>
             <h1 className="font-bold">Resumo gerado por IA:</h1>
-            <p>{userSummary}</p>
+            <p>{userTextualSummary}</p>
+            <DognutContributions userSummary={userSummary} />
           </Card>
         );
       })}

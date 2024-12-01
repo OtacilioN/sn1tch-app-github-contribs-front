@@ -4,11 +4,26 @@ import OpenAI from "openai";
 import { zodResponseFormat } from "openai/helpers/zod";
 import { z } from "zod";
 
+const contribTypes = z.enum([
+  "Documentação",
+  "Frontend",
+  "Backend",
+  "Infraestrutura e DevOps",
+  "Gerenciamento do Projeto",
+  "Testes e Qualidade",
+  "Pesquisa e Desenvolvimento",
+  "Integração e Comunicação",
+  "Treinamento e Suporte",
+]);
+
 const Resumo = z.object({
   summary: z.array(
     z.object({
       userEmail: z.string(),
       userSummary: z.string(),
+      contributionCounts: z.array(
+        z.object({ type: contribTypes, count: z.number() })
+      ),
     })
   ),
 });
