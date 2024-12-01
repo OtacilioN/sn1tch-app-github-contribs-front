@@ -13,7 +13,6 @@ const contribTypes = z.enum([
   "Testes e Qualidade",
   "Pesquisa e Desenvolvimento",
   "Integração e Comunicação",
-  "Treinamento e Suporte",
 ]);
 
 const Resumo = z.object({
@@ -43,14 +42,15 @@ export async function POST(request: Request) {
         {
           role: "system",
           content:
-            "Faça um resumo das contribuições de cada aluno do projeto a partir dos emails e mensagens de commit",
+            "Faça um resumo das contribuições de cada aluno do projeto a partir dos dados de commits do git e de registros no documento do Google Docs. Agrupe as contribuições de um mesmo aluno no email com maior numero de contribuições, sinalizando o email principal deste aluno no campo userEmail. Realize uma síntese das principais contribuições de cada aluno no campo userSummary, caso o aluno tenha commits com mais de um email, sinalize no sumário quais outros emails deste aluno realizaram commits. Para cada aluno, informe a quantidade de contribuições de cada tipo.",
         },
         {
           role: "user",
           content: `Dados obtidos do git:
 ${gitData
   .map(
-    (item: any) => `email: ${item.email}, messagem de commit: ${item.message}`
+    (item: any) =>
+      `email: ${item.email} \n handle do estudante: ${item.name} \n messagem de commit: ${item.message}`
   )
   .join("\n")}
   
